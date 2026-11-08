@@ -128,6 +128,6 @@ Details and evidence: [docs/FINDINGS.md](docs/FINDINGS.md).
 
 ## License
 
-No license is granted yet; all rights reserved.
+MIT. See [LICENSE](LICENSE).
 
 **Last measured**: 2026-11-08. See [results/2026-11-08/](results/2026-11-08/).
