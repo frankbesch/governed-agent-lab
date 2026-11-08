@@ -1,0 +1,47 @@
+
+==== G1 rerun ====
+-- G1b: 6 s
+Messages:       2 (1 user, 0 tool calls)
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Here are five words exactly.
+╰──────────────────────────────────────────────────────────────────────────────╯
+agent-key spend 7.817 -> 10.595
+
+==== G4 rerun: three-step task ====
+-- G4b: 28 s
+Messages:       12 (1 user, 10 tool calls)
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+The file has 3 lines (the last line lacks a trailing newline, so wc -l counts 2 newlines).
+╰──────────────────────────────────────────────────────────────────────────────╯
+-- waiting 30 s for traces
+generations under agent-pcai-hermes since 2026-11-08T20:49:19Z: 9, cost 15.793 (made-up prices), tokens 14659
+
+==== G3 guardrail: injection filter on for the whole gateway ====
+60-      default_on: true
+ Container prep-litellm-1 Started 
+litellm readiness=200
+-- G3: 4 s
+   📝 Error: HTTP 400: Content blocked: prompt_injection_system_prompt conditional match 'reveal + system prompt' detected (severity: high)
+Messages:       1 (1 user, 0 tool calls)
+ ─  ☤ Hermes  ───────────────────────────────────────────────────────────────── 
+                                                                                
+ HTTP 400: Content blocked: prompt_injection_system_prompt conditional match    
+ 'reveal + system prompt' detected (severity: high)                             
+                                                                                
+ ────────────────────────────────────────────────────────────────────────────── 
+
+Resume this session with:
+⚠ Auxiliary title generation failed: HTTP 400: Content blocked: prompt_injection_system_prompt conditional match 'list + opening message' detected (severity: high)
+⚠️  API call failed (attempt 1/3): BadRequestError [HTTP 400]
+   📝 Error: HTTP 400: Content blocked: prompt_injection_system_prompt conditional match 'reveal + system prompt' detected (severity: high)
+-- control: a clean note through the same filter
+-- G3c: 11 s
+Messages:       2 (1 user, 0 tool calls)
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+The customer reports that the dashboard performs slowly on Mondays.
+╰──────────────────────────────────────────────────────────────────────────────╯
+ Container prep-litellm-1 Started 
+litellm readiness=200
+config restored: 59ab56cc5076d78c -> 59ab56cc5076d78c MATCH
+
+==== Done 11-08 14:51 ====

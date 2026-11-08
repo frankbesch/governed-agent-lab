@@ -1,0 +1,16 @@
+Query: Reply with exactly five words.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+Here are five words exactly.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261108_204921_1f4323
+
+Session:        20261108_204921_1f4323
+Duration:       3s
+Messages:       2 (1 user, 0 tool calls)

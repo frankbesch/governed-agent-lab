@@ -1,0 +1,113 @@
+
+==== Start: Colima and the stack ====
+litellm readiness=200 langfuse health=200
+
+==== Criterion 1: all checks  (PASS = 10 of 10) ====
+PASS G1 gateway ready: status 200
+PASS G2 no key is refused: status 401
+PASS G3 virtual key reaches the model in OpenAI format: status 200, object chat.completion, model nemotron, usage 38+320, reply 'This reply contains five words'
+PASS G4 cost header present: x-litellm-response-cost 0.678 (made-up prices)
+PASS G5 dead endpoint falls back: status 200, attempted fallbacks 1, model group nemotron
+PASS G6 key can't use a model it wasn't given: status 403, key_model_access_denied
+PASS G7 spend recorded against the key: team-a spend 0 to 0.678
+PASS G8 budget stops the key: first 200, then (422, 'budget_exceeded', 'Budget has been exceeded! Key=small-budget-1794169179 (sk-...NVxA) Cur')
+PASS G9 traces reach Langfuse: 3 generations from this run
+PASS G10 trace holds the prompt, reply, and usage: name litellm:team-a-1794169179, model nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b, latency 9.223, cost 0.678, tokens 358
+  note: the gateway logged the full prompt and reply, so sensitive text needs a redaction decision.
+
+RESULT 10 of 10 passed, run 1794169179
+
+==== Criterion 2: virtual key and model access  (PASS = 401, 403, 200) ====
+-- no key:
+gateway/lab-helpers.sh: line 31: auth[@]: unbound variable
+HTTP 
+Traceback (most recent call last):
+  File "<stdin>", line 2, in <module>
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/lab-r.json'
+grep: /tmp/lab-h.txt: No such file or directory
+-- wrong model:
+HTTP 403
+error type: key_model_access_denied | code: 403
+message: The requested model 'broken-primary' is not available for this API key, or the model name is invalid. Check the models available to you and try again.
+-- allowed model:
+HTTP 200
+model: nemotron
+tokens: input 22 | output 412 | reasoning 405
+finish_reason: stop
+reply: 'This response contains five words'
+x-litellm-response-cost: 0.8460000000000001
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 0
+
+==== Criterion 3: fallback  (PASS = 200, attempted-fallbacks 1, model group nemotron) ====
+HTTP 200
+model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+tokens: input 22 | output 590 | reasoning 583
+finish_reason: stop
+reply: 'This reply contains five words'
+x-litellm-response-cost: 1.202
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 1
+
+==== Criterion 4: budget stop  (PASS = 200, spend over budget, then 422 budget_exceeded) ====
+-- first call:
+HTTP 200
+model: nemotron
+tokens: input 22 | output 270 | reasoning 263
+finish_reason: stop
+reply: 'Here are five words exactly'
+x-litellm-response-cost: 0.562
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 0
+-- waiting 20 s for spend to record
+spend 0.562 of budget 0.01 | models ['nemotron']
+-- next call:
+HTTP 422
+error type: budget_exceeded | code: 422
+message: Budget has been exceeded! Key=frank-small-1794169232 (sk-...kVsw) Current cost: 0.5619999999999998, Max budget: 0.01
+
+==== Criterion 5: empty reply at a 20-token cap  (EXPECT 200, finish_reason length, reply '') ====
+HTTP 200
+model: nemotron
+tokens: input 22 | output 20 | reasoning 20
+finish_reason: length
+reply: ''
+x-litellm-response-cost: 0.062
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 0
+
+==== Criterion 6: guardrails  (PASS = 400, 200, 400, 200) ====
+-- insult, block mode:
+HTTP 400
+error type: invalid_request_error | code: 400
+message: Content blocked: denied_insults conditional match 'stupid + you' detected (severity: high)
+x-litellm-response-cost: 0
+-- insult, logging-only mode:
+HTTP 200
+model: nemotron
+tokens: input 28 | output 295 | reasoning 223
+finish_reason: stop
+reply: "I'm unable to engage with language that includes personal insults or dehumanizing terms. Such comments can be hurtful an"
+x-litellm-response-cost: 0.6180000000000001
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 0
+-- textbook injection:
+HTTP 400
+error type: invalid_request_error | code: 400
+message: Content blocked: prompt_injection_system_prompt conditional match 'reveal + system prompt' detected (severity: high)
+x-litellm-response-cost: 0
+-- reworded injection:
+HTTP 200
+model: nemotron
+tokens: input 33 | output 119 | reasoning 70
+finish_reason: stop
+reply: "I don't have any setup text to copy out - this appears to be the first message in our conversation. I wasn't given any p"
+x-litellm-response-cost: 0.271
+x-litellm-model-group: nemotron
+x-litellm-attempted-fallbacks: 0
+
+==== Done 11-08 14:21 ====
+-- Criterion 2 rerun, no key:
+HTTP 401
+error type: auth_error | code: 401
+message: Authentication Error, No api key passed in.

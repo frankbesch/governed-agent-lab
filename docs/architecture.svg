@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 430" width="1000" height="430" xmlns="http://www.w3.org/2000/svg" font-family="Avenir Next, Inter, Helvetica Neue, sans-serif" role="img" aria-label="Request path from the sandboxed agent through the OpenShell proxy and LiteLLM gateway to the NVIDIA model, with Langfuse tracing">
+  <rect x="0" y="0" width="1000" height="430" fill="#FBFBFE"/>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#5C5F78"/></marker>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#8D3731"/></marker>
+  </defs>
+  <!-- zones -->
+  <rect x="10" y="30" width="330" height="250" rx="6" fill="#E5E1DF" stroke="#8A681E" stroke-dasharray="5 4"/>
+  <text x="22" y="22" font-size="13" font-weight="600" fill="#8A681E" font-family="IBM Plex Mono, Menlo, monospace">NEMOCLAW SANDBOX · agent</text>
+  <rect x="380" y="30" width="400" height="250" rx="6" fill="#D8DEE8" stroke="#1E5468" stroke-dasharray="5 4"/>
+  <text x="392" y="22" font-size="13" font-weight="600" fill="#1E5468" font-family="IBM Plex Mono, Menlo, monospace">GATEWAY STACK · Docker on Colima</text>
+  <text x="820" y="22" font-size="13" font-weight="600" fill="#5A707E" font-family="IBM Plex Mono, Menlo, monospace">HOSTED MODEL</text>
+
+  <!-- agent -->
+  <rect x="30" y="60" width="140" height="80" rx="4" fill="#FBFBFE" stroke="#22232E"/>
+  <text x="100" y="92" text-anchor="middle" font-size="15" font-weight="600" fill="#22232E">Hermes agent</text>
+  <text x="100" y="112" text-anchor="middle" font-size="11.5" fill="#5C5F78">files, Python, tools</text>
+  <text x="100" y="128" text-anchor="middle" font-size="11.5" fill="#5C5F78">holds a placeholder only</text>
+  <!-- proxy -->
+  <rect x="200" y="60" width="125" height="200" rx="4" fill="#FBFBFE" stroke="#8A681E" stroke-width="1.6"/>
+  <text x="262" y="90" text-anchor="middle" font-size="15" font-weight="600" fill="#22232E">OpenShell</text>
+  <text x="262" y="108" text-anchor="middle" font-size="15" font-weight="600" fill="#22232E">proxy</text>
+  <text x="262" y="134" text-anchor="middle" font-size="11.5" fill="#5C5F78">allow list per</text>
+  <text x="262" y="149" text-anchor="middle" font-size="11.5" fill="#5C5F78">host and program</text>
+  <text x="262" y="172" text-anchor="middle" font-size="11.5" fill="#5C5F78">injects the virtual</text>
+  <text x="262" y="187" text-anchor="middle" font-size="11.5" fill="#5C5F78">key at egress</text>
+  <!-- sandbox tasks -->
+  <rect x="30" y="160" width="140" height="100" rx="4" fill="#FBFBFE" stroke="#D0D2E6"/>
+  <text x="100" y="182" text-anchor="middle" font-size="11.5" font-weight="600" fill="#22232E">Agent actions</text>
+  <text x="100" y="202" text-anchor="middle" font-size="11" fill="#5C5F78">write files · run code</text>
+  <text x="100" y="218" text-anchor="middle" font-size="11" fill="#5C5F78">install · fetch · remember</text>
+  <text x="100" y="240" text-anchor="middle" font-size="11" fill="#8A681E" font-family="IBM Plex Mono, Menlo, monospace">T1–T5</text>
+
+  <!-- forwarder -->
+  <rect x="395" y="125" width="80" height="60" rx="4" fill="#FBFBFE" stroke="#5A707E" stroke-dasharray="3 3"/>
+  <text x="435" y="150" text-anchor="middle" font-size="11.5" font-weight="600" fill="#22232E">forwarder</text>
+  <text x="435" y="167" text-anchor="middle" font-size="11" fill="#5C5F78">:4100 → :4000</text>
+  <!-- litellm -->
+  <rect x="505" y="60" width="160" height="200" rx="4" fill="#FBFBFE" stroke="#1E5468" stroke-width="1.8"/>
+  <text x="585" y="90" text-anchor="middle" font-size="15" font-weight="600" fill="#22232E">LiteLLM gateway</text>
+  <text x="585" y="116" text-anchor="middle" font-size="11.5" fill="#5C5F78">virtual key per agent</text>
+  <text x="585" y="134" text-anchor="middle" font-size="11.5" fill="#5C5F78">model access rule</text>
+  <text x="585" y="152" text-anchor="middle" font-size="11.5" fill="#5C5F78">budget and spend</text>
+  <text x="585" y="170" text-anchor="middle" font-size="11.5" fill="#5C5F78">fallback to a live model</text>
+  <text x="585" y="188" text-anchor="middle" font-size="11.5" fill="#5C5F78">guardrails before the model</text>
+  <text x="585" y="236" text-anchor="middle" font-size="11" fill="#1E5468" font-family="IBM Plex Mono, Menlo, monospace">C1–C4 · C6 · L2 · L3</text>
+  <!-- langfuse -->
+  <rect x="690" y="150" width="80" height="110" rx="4" fill="#FBFBFE" stroke="#557459" stroke-width="1.6"/>
+  <text x="730" y="178" text-anchor="middle" font-size="13" font-weight="600" fill="#22232E">Langfuse</text>
+  <text x="730" y="198" text-anchor="middle" font-size="11" fill="#5C5F78">prompt, reply</text>
+  <text x="730" y="214" text-anchor="middle" font-size="11" fill="#5C5F78">tokens, cost</text>
+  <text x="730" y="236" text-anchor="middle" font-size="11" fill="#557459" font-family="IBM Plex Mono, Menlo, monospace">C5 · L4</text>
+  <!-- model -->
+  <rect x="815" y="60" width="170" height="80" rx="4" fill="#FBFBFE" stroke="#5A707E"/>
+  <text x="900" y="92" text-anchor="middle" font-size="14" font-weight="600" fill="#22232E">NVIDIA endpoint</text>
+  <text x="900" y="112" text-anchor="middle" font-size="11.5" fill="#5C5F78">Nemotron 3 Ultra</text>
+  <text x="900" y="128" text-anchor="middle" font-size="11.5" fill="#5C5F78">provider key stays here</text>
+  <rect x="815" y="160" width="170" height="100" rx="4" fill="#FBFBFE" stroke="#D0D2E6"/>
+  <text x="900" y="186" text-anchor="middle" font-size="12" font-weight="600" fill="#22232E">On a private AI platform</text>
+  <text x="900" y="206" text-anchor="middle" font-size="11" fill="#5C5F78">NIM on local GPUs</text>
+  <text x="900" y="222" text-anchor="middle" font-size="11" fill="#5C5F78">gateway bundled with it</text>
+  <text x="900" y="238" text-anchor="middle" font-size="11" fill="#5C5F78">tracing added as an app</text>
+
+  <!-- flow arrows -->
+  <line x1="170" y1="100" x2="198" y2="100" stroke="#5C5F78" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="170" y1="210" x2="198" y2="210" stroke="#5C5F78" stroke-width="2" marker-end="url(#ar)"/>
+  <path d="M325,155 L393,155" stroke="#5C5F78" stroke-width="2" fill="none" marker-end="url(#ar)"/>
+  <line x1="475" y1="155" x2="503" y2="155" stroke="#5C5F78" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="665" y1="100" x2="813" y2="100" stroke="#5C5F78" stroke-width="2" marker-end="url(#ar)"/>
+  <line x1="665" y1="205" x2="688" y2="205" stroke="#557459" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#ar)"/>
+  <text x="740" y="92" text-anchor="middle" font-size="10.5" fill="#5C5F78">provider key</text>
+  <!-- path badge -->
+  <text x="360" y="146" text-anchor="middle" font-size="11" fill="#1E5468" font-family="IBM Plex Mono, Menlo, monospace">L1</text>
+  <!-- denied direct path -->
+  <path d="M262,260 L262,325 L900,325 L900,262" stroke="#8D3731" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#arr)"/>
+  <rect x="520" y="311" width="240" height="28" rx="3" fill="#E5DBE1"/>
+  <text x="640" y="330" text-anchor="middle" font-size="12" font-weight="600" fill="#8D3731">Direct to model: denied, 403 · L5</text>
+  <!-- blocked web -->
+  <path d="M200,235 L120,235" stroke="none"/>
+  <text x="262" y="230" text-anchor="middle" font-size="11" fill="#8D3731">off-list host: blocked</text>
+  <text x="262" y="246" text-anchor="middle" font-size="11" fill="#8D3731" font-family="IBM Plex Mono, Menlo, monospace">T2</text>
+
+  <!-- legend line -->
+  <text x="10" y="372" font-size="11.5" fill="#22232E"><tspan font-weight="600" font-family="IBM Plex Mono, Menlo, monospace" fill="#8A681E">T1–T5</tspan> sandbox tasks   <tspan font-weight="600" font-family="IBM Plex Mono, Menlo, monospace" fill="#1E5468">C1–C6</tspan> gateway criteria   <tspan font-weight="600" font-family="IBM Plex Mono, Menlo, monospace" fill="#1E5468">L1–L5</tspan> combined gates</text>
+  <text x="10" y="394" font-size="11.5" fill="#5C5F78">Solid arrows carry a model call. The dashed green arrow is the trace. The red path is the egress the proxy refuses.</text>
+  <text x="10" y="416" font-size="11.5" fill="#5C5F78">The forwarder exists because NemoClaw reserves port 4000 for its own Model Router, and LiteLLM uses 4000 by default.</text>
+</svg>

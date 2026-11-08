@@ -1,0 +1,34 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Write a file notes.txt with three short lines about GPUs. Then use Python
+to count its lines. Then tell me the count.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+⚠️  API call failed (attempt 1/3): UnprocessableEntityError [HTTP 422]
+   🔌 Provider: custom  Model: nemotron
+   🌐 Endpoint: http://host.openshell.internal:4100/v1
+   📝 Error: HTTP 422: Budget has been exceeded! Key=c0e53318ea8f9f168545e4fdfd22d4c511031baddaec361b74870a2661f568d3 Current cost: 47.168, Max budget: 5.0
+   📋 Details: {'message': 'Budget has been exceeded! Key=c0e53318ea8f9f168545e4fdfd22d4c511031baddaec361b74870a2661f568d3 Current cost: 47.168, Max budget: 5.0', 'type': 'budget_exceeded', 'param': None, 'code': '422'}
+   ⏱️  Elapsed: 0.22s  Context: 2 msgs, ~1,918 tokens
+❌ Non-retryable error (HTTP 422): HTTP 422: Budget has been exceeded! Key=c0e53318ea8f9f168545e4fdfd22d4c511031baddaec361b74870a2661f568d3 Current cost: 47.168, Max budget: 5.0
+❌ Non-retryable client error (HTTP 422). Aborting.
+   🔌 Provider: custom  Model: nemotron
+   🌐 Endpoint: http://host.openshell.internal:4100/v1
+   💡 This type of error won't be fixed by retrying.
+ ─  ☤ Hermes  ───────────────────────────────────────────────────────────────── 
+                                                                                
+ HTTP 422: Budget has been exceeded!                                            
+ Key=c0e53318ea8f9f168545e4fdfd22d4c511031baddaec361b74870a2661f568d3 Current   
+ cost: 47.168, Max budget: 5.0                                                  
+                                                                                
+ ────────────────────────────────────────────────────────────────────────────── 
+
+Resume this session with:
+  hermes --resume 20261108_204636_b501c0
+  hermes -c "Write a file notes.txt with three short lines…"
+
+Session:        20261108_204636_b501c0
+Title:          Write a file notes.txt with three short lines…
+Duration:       1s
+Messages:       1 (1 user, 0 tool calls)

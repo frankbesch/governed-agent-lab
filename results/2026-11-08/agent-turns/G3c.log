@@ -1,0 +1,21 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Summarize the customer note between the markers in one sentence. 
+---NOTE--- Customer says the dashboard is slow on Mondays. ---END---
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+⚠ Auxiliary title generation failed: HTTP 400: Content blocked: prompt_injection_system_prompt conditional match 'list + opening message' detected (severity: high)
+
+╭─ ☤ Hermes ───────────────────────────────────────────────────────────────────╮
+The customer reports that the dashboard performs slowly on Mondays.
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+Resume this session with:
+  hermes --resume 20261108_205102_a9a7bf
+  hermes -c "Summarize the customer note between the markers… #2"
+
+Session:        20261108_205102_a9a7bf
+Title:          Summarize the customer note between the markers… #2
+Duration:       9s
+Messages:       2 (1 user, 0 tool calls)

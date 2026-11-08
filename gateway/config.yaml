@@ -1,0 +1,61 @@
+# Synthetic study config. Prices are made up so spend tracking is visible; they are not NVIDIA's prices.
+model_list:
+  - model_name: nemotron
+    litellm_params:
+      model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+      api_key: os.environ/NVIDIA_NIM_API_KEY
+      input_cost_per_token: 0.001
+      output_cost_per_token: 0.002
+  - model_name: broken-primary
+    litellm_params:
+      model: nvidia_nim/nvidia/nemotron-3-ultra-550b-a55b
+      api_key: os.environ/NVIDIA_NIM_API_KEY
+      api_base: http://127.0.0.1:11999/v1
+      input_cost_per_token: 0.001
+      output_cost_per_token: 0.002
+  - model_name: embedder
+    litellm_params:
+      model: nvidia_nim/nvidia/nemotron-3-embed-1b
+      api_key: os.environ/NVIDIA_NIM_API_KEY
+router_settings:
+  num_retries: 0
+  fallbacks: [{"broken-primary": ["nemotron"]}]
+litellm_settings:
+  success_callback: ["langfuse"]
+  drop_params: true
+# Off by default; a request turns one on with "guardrails": ["name"]. Set default_on: true for the blog's "Always on".
+guardrails:
+  - guardrail_name: insult-filter
+    litellm_params:
+      guardrail: litellm_content_filter
+      mode: pre_call
+      default_on: false
+      categories:
+        - category: denied_insults
+          enabled: true
+          action: BLOCK
+          severity_threshold: medium
+  - guardrail_name: insult-logged
+    litellm_params:
+      guardrail: litellm_content_filter
+      mode: logging_only
+      default_on: false
+      categories:
+        - category: denied_insults
+          enabled: true
+          action: BLOCK
+          severity_threshold: medium
+  - guardrail_name: injection-filter
+    litellm_params:
+      guardrail: litellm_content_filter
+      mode: pre_call
+      default_on: false
+      categories:
+        - category: prompt_injection_jailbreak
+          enabled: true
+          action: BLOCK
+          severity_threshold: medium
+        - category: prompt_injection_system_prompt
+          enabled: true
+          action: BLOCK
+          severity_threshold: medium

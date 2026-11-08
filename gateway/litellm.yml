@@ -1,0 +1,38 @@
+# Local study stack. Bound to this Mac only. Synthetic prompts only.
+services:
+  litellm:
+    image: docker.litellm.ai/berriai/litellm:v1.106.6
+    restart: always
+    command: ["--config", "/app/config.yaml", "--port", "4000"]
+    ports:
+      - 127.0.0.1:4000:4000
+    volumes:
+      - ./config.yaml:/app/config.yaml:ro
+    environment:
+      LITELLM_MASTER_KEY: ${LITELLM_MASTER_KEY:?}
+      LITELLM_SALT_KEY: ${LITELLM_SALT_KEY:?}
+      DATABASE_URL: postgresql://litellm:${LITELLM_DB_PASSWORD:?}@litellm-db:5432/litellm
+      NVIDIA_NIM_API_KEY: ${NVIDIA_NIM_API_KEY:?}
+      LANGFUSE_PUBLIC_KEY: ${LANGFUSE_INIT_PROJECT_PUBLIC_KEY:?}
+      LANGFUSE_SECRET_KEY: ${LANGFUSE_INIT_PROJECT_SECRET_KEY:?}
+      LANGFUSE_HOST: http://langfuse-web:3000
+      LITELLM_TELEMETRY: "False"
+    depends_on:
+      litellm-db:
+        condition: service_healthy
+  litellm-db:
+    image: docker.io/postgres:16
+    restart: always
+    environment:
+      POSTGRES_USER: litellm
+      POSTGRES_PASSWORD: ${LITELLM_DB_PASSWORD:?}
+      POSTGRES_DB: litellm
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U litellm"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    volumes:
+      - litellm_postgres_data:/var/lib/postgresql/data
+volumes:
+  litellm_postgres_data:

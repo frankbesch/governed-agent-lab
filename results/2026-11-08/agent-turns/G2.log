@@ -1,0 +1,33 @@
+Warning: Unknown toolsets: audio, nemoclaw
+Query: Reply with exactly five words.
+Initializing agent...
+  ⚠ tirith security scanner enabled but not available — command scanning will use pattern matching only
+────────────────────────────────────────
+
+⚠ Auxiliary title generation failed: HTTP 422: Budget has been exceeded! Key=agent-pcai-hermes (sk-...sWkQ) Current cost: 2.838000000000001, Max budget: 2.838
+⚠️  API call failed (attempt 1/3): UnprocessableEntityError [HTTP 422]
+   🔌 Provider: custom  Model: nemotron
+   🌐 Endpoint: http://host.openshell.internal:4100/v1
+   📝 Error: HTTP 422: Budget has been exceeded! Key=agent-pcai-hermes (sk-...sWkQ) Current cost: 2.838000000000001, Max budget: 2.838
+   📋 Details: {'message': 'Budget has been exceeded! Key=agent-pcai-hermes (sk-...sWkQ) Current cost: 2.838000000000001, Max budget: 2.838', 'type': 'budget_exceeded', 'param': None, 'code': '422'}
+   ⏱️  Elapsed: 0.42s  Context: 2 msgs, ~1,896 tokens
+❌ Non-retryable error (HTTP 422): HTTP 422: Budget has been exceeded! Key=agent-pcai-hermes (sk-...sWkQ) Current cost: 2.838000000000001, Max budget: 2.838
+❌ Non-retryable client error (HTTP 422). Aborting.
+   🔌 Provider: custom  Model: nemotron
+   🌐 Endpoint: http://host.openshell.internal:4100/v1
+   💡 This type of error won't be fixed by retrying.
+ ─  ☤ Hermes  ───────────────────────────────────────────────────────────────── 
+                                                                                
+ HTTP 422: Budget has been exceeded! Key=agent-pcai-hermes (sk-...sWkQ) Current 
+ cost: 2.838000000000001, Max budget: 2.838                                     
+                                                                                
+ ────────────────────────────────────────────────────────────────────────────── 
+
+Resume this session with:
+  hermes --resume 20261108_204715_da2978
+  hermes -c "Reply with exactly five words. #2"
+
+Session:        20261108_204715_da2978
+Title:          Reply with exactly five words. #2
+Duration:       2s
+Messages:       1 (1 user, 0 tool calls)
